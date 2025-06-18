@@ -209,8 +209,8 @@ class A2AClient:
         if not request.id:
             request.id = str(uuid4())
 
-        return SendMessageResponse(
-            **await self._send_request(
+        return SendMessageResponse.model_validate(
+            await self._send_request(
                 request.model_dump(mode='json', exclude_none=True),
                 http_kwargs,
             )
